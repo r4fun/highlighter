@@ -1,3 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;900&display=swap');
+
+/* font of the app title */
+.app-title {
+  font-family: 'Rubik', sans-serif;
+  font-size: 48px;
+  font-weight: bold;
+}
+
+/* font of everything else */
+body {
+  font-family: 'Rubik', sans-serif;
+}
 
 /* colors for text highlighting */
 .red {
@@ -6,4 +19,17 @@
 
 .blue {
   background-color: #6ECFEA;
+}
+
+/* hide progress bar for fileInput */
+.shiny-file-input-progress {
+  display: none
+}
+
+/* cards or 'wellPanels' as shiny calls them */
+.well {
+  border-radius: 0px;
+  -webkit-box-shadow: 5px 5px 0px 0px rgba(50, 50, 50, 0.75);
+  -moz-box-shadow:    5px 5px 0px 0px rgba(50, 50, 50, 0.75);
+  box-shadow:         5px 5px 0px 0px rgba(50, 50, 50, 0.75);
 }

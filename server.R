@@ -1,5 +1,10 @@
 server <- function(input, output, session) {
   # ----------------------------------------------------------------------------
+  #' Waiter screens
+  # ----------------------------------------------------------------------------
+  w <- Waiter$new(html = span("Initialising", br(), br(), spin_dots()))
+
+  # ----------------------------------------------------------------------------
   #' Disable the previous/next buttons by default (on load)
   # ----------------------------------------------------------------------------
   disable("next_text")
@@ -19,9 +24,10 @@ server <- function(input, output, session) {
   # ----------------------------------------------------------------------------
   data <- reactive({
     req(input$file)
+    w$show()
 
     ext <- file_ext(input$file$name)
-    switch (ext,
+    out <- switch (ext,
       csv = read_csv(input$file$datapath, delim = ","),
       rds = read_rds(input$file$datapath),
       xlsx = {
@@ -34,6 +40,9 @@ server <- function(input, output, session) {
       },
       validate("Invalid file; Please upload a .csv, .xlsx, or .rds file")
     )
+
+    w$hide()
+    out
   })
 
   # ----------------------------------------------------------------------------

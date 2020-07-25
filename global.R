@@ -8,6 +8,7 @@ suppressPackageStartupMessages({
   library(readr)
   library(readxl)
   library(magrittr)
+  library(waiter)
 })
 
 # 30MB file upload max

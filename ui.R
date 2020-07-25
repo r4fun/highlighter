@@ -1,8 +1,9 @@
 ui <- fluidPage(
   use_marker(),
   useShinyjs(),
+  use_waiter(),
   includeCSS("www/custom.css"),
-  titlePanel(paste("Highlighter", ji("pencil"))),
+  titlePanel(div(class = "app-title", paste("Highlighter", ji("pencil")))),
   sidebarLayout(
     sidebarPanel = sidebarPanel(
       "Please upload a file, then select a column name and hit the go button to
@@ -44,25 +45,8 @@ ui <- fluidPage(
         inputId = "go",
         label = "Render text",
         width = "100%"
-      )
-    ),
-    mainPanel = mainPanel(
-      actionButton(
-        inputId = "previous_text",
-        label = "Previous"
       ),
-      actionButton(
-        inputId = "next_text",
-        label = "Next"
-      ),
-      br(),
-      br(),
-      wellPanel(
-        div(
-          id = "text-to-mark",
-          textOutput("text")
-        )
-      ),
+      hr(),
       textInput(
         inputId = "text1",
         label = "Keywords to highlight in red"
@@ -70,6 +54,24 @@ ui <- fluidPage(
       textInput(
         inputId = "text2",
         label = "Keywords to highlight in blue"
+      ),
+      actionButton(
+        width = "50%",
+        inputId = "previous_text",
+        label = "Previous"
+      ),
+      actionButton(
+        width = "49%",
+        inputId = "next_text",
+        label = "Next"
+      )
+    ),
+    mainPanel = mainPanel(
+      wellPanel(
+        div(
+          id = "text-to-mark",
+          textOutput("text")
+        )
       )
     )
   )
