@@ -21,10 +21,10 @@ body {
   background-color: #6ECFEA;
 }
 
-/* hide progress bar for fileInput */
+/* hide progress bar for fileInput
 .shiny-file-input-progress {
   display: none
-}
+} */
 
 /* cards or 'wellPanels' as shiny calls them */
 .well {
