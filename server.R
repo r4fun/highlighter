@@ -28,7 +28,7 @@ server <- function(input, output, session) {
 
     ext <- file_ext(input$file$name)
     out <- switch (ext,
-      csv = read_csv(input$file$datapath, delim = ","),
+      csv = read_csv(input$file$datapath),
       rds = read_rds(input$file$datapath),
       xlsx = {
         sheets <- excel_sheets(input$file$datapath)
