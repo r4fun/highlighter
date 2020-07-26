@@ -91,10 +91,13 @@ ui <- fluidPage(
       )
     ),
     mainPanel = mainPanel(
-      wellPanel(
-        div(
-          id = "text-to-mark",
-          textOutput("text")
+      div(
+        id = "guide_text",
+        wellPanel(
+          div(
+            id = "text-to-mark",
+            textOutput("text")
+          )
         )
       )
     )
