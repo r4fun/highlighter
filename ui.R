@@ -1,4 +1,5 @@
 ui <- fluidPage(
+  title = paste("Highlighter", ji("pencil")),
   use_marker(),
   useShinyjs(),
   use_waiter(),
