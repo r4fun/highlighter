@@ -9,6 +9,7 @@ suppressPackageStartupMessages({
   library(magrittr)
   library(waiter)
   library(cicerone)
+  library(sever)
 })
 
 # 30MB file upload max

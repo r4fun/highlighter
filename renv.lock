@@ -346,6 +346,13 @@
       "Repository": "CRAN",
       "Hash": "33a5b27a03da82ac4b1d43268f80088a"
     },
+    "sever": {
+      "Package": "sever",
+      "Version": "0.0.4",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "bcaf31f5974c527e3474021e5e3d3895"
+    },
     "shiny": {
       "Package": "shiny",
       "Version": "1.5.0",

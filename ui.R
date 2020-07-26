@@ -4,6 +4,7 @@ ui <- fluidPage(
   useShinyjs(),
   use_waiter(),
   use_cicerone(),
+  use_sever(),
   includeCSS("www/custom.css"),
   titlePanel(div(class = "app-title", paste("Highlighter", ji("pencil")))),
   sidebarLayout(
