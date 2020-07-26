@@ -14,7 +14,9 @@ highlighting keywords using the
 [`marker`](https://github.com/JohnCoene/marker) package.
 
 A demonstration of the app can be found
-[here](https://tylerlittlefield.com/shiny/tyler/highlighter/).
+[here](https://tylerlittlefield.com/shiny/tyler/highlighter/). Please
+keep in mind that this demo is run on a cheap/low resource server, so
+you cannot load large datasets on this demo.
 
 ## Installation
 

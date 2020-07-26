@@ -97,7 +97,7 @@ server <- function(input, output, session) {
   #' * store the max index
   #' * render the text.
   # ----------------------------------------------------------------------------
-  observeEvent(input$go, {
+  observeEvent(input$colname, {
     out <- extract_text(
       .data = data(),
       idx = rv$idx,
@@ -172,5 +172,13 @@ server <- function(input, output, session) {
     marker$
       unmark(className = "blue")$
       mark(input$text2, className = "blue")
+  })
+
+  # ----------------------------------------------------------------------------
+  #' App tour
+  # ----------------------------------------------------------------------------
+  guide$init()
+  observeEvent(input$help, {
+    guide$start()
   })
 }

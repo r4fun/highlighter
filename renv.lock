@@ -51,6 +51,18 @@
       "Repository": "CRAN",
       "Hash": "f61dbaec772ccd2e17705c1e872e9e7c"
     },
+    "cicerone": {
+      "Package": "cicerone",
+      "Version": "1.0.3",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "cicerone",
+      "RemoteUsername": "JohnCoene",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "6272e9f15bd8b392fa60b5ab8a4daf23e2b6da91",
+      "Hash": "3a72f0a072e72dc86b7eaedb246d49ab"
+    },
     "cli": {
       "Package": "cli",
       "Version": "2.0.2",
