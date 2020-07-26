@@ -18,6 +18,8 @@ A demonstration of the app can be found
 keep in mind that this demo is run on a cheap/low resource server, so
 you cannot load large datasets on this demo.
 
+![](www/demo.png)<!-- -->
+
 ## Installation
 
 You can run the following in your terminal:
