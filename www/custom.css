@@ -51,3 +51,12 @@ body {
   -moz-box-shadow:    5px 5px 0px 0px rgba(50, 50, 50, 0.75);
   box-shadow:         5px 5px 0px 0px rgba(50, 50, 50, 0.75);
 }
+
+/* remove modal hr's */
+.modal-header {
+  border-bottom: 0 none;
+}
+
+.modal-footer {
+  border-top: 0 none;
+}

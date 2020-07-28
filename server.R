@@ -1,4 +1,25 @@
 server <- function(input, output, session) {
+  observeEvent(input$file_button, {
+    file_modal()
+  })
+
+  observeEvent(input$textarea_button, {
+    textarea_modal()
+  })
+
+  observeEvent(input$cancel_textarea, {
+    removeModal()
+  })
+
+  observeEvent(input$confirm_textarea, {
+    output$text <- renderText(input$textarea)
+    removeModal()
+  })
+
+  observeEvent(input$cancel_upload, {
+    removeModal()
+  })
+
   # ----------------------------------------------------------------------------
   #' Pretty disconnection screen
   # ----------------------------------------------------------------------------
@@ -24,12 +45,18 @@ server <- function(input, output, session) {
     update_idx = 1L
   )
 
+  observe({
+    print(input$next_text)
+    print(input$previous_text)
+  })
+
   # ----------------------------------------------------------------------------
   #' Reactive data input, provided by user via file upload
   # ----------------------------------------------------------------------------
   data <- reactive({
     req(input$file)
     w$show()
+    removeModal()
 
     ext <- file_ext(input$file$name)
     out <- switch (ext,

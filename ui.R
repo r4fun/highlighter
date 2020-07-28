@@ -9,20 +9,29 @@ ui <- fluidPage(
   titlePanel(div(class = "app-title", paste("Highlighter", ji("pencil")))),
   sidebarLayout(
     sidebarPanel = sidebarPanel(
-      "Please upload a file, then select a column name and hit the go button to
-      render text. If you are uploading a .xlsx file, you have the option to
-      define the tab you're interested in.",
+      "Upload a file or copy text from your clipboard!",
       br(),
       br(),
-      div(
-        id = "guide_file",
-        fileInput(
-          inputId = "file",
-          label = NULL,
-          accept = c(
-            ".csv",
-            ".xlsx",
-            ".rds"
+      fluidRow(
+        column(
+          width = 6,
+          div(
+            id = "guide_file",
+            actionButton(
+              width = "100%",
+              inputId = "file_button",
+              label = "Upload file",
+              icon = icon("upload")
+            )
+          )
+        ),
+        column(
+          width = 6,
+          actionButton(
+            width = "100%",
+            inputId = "textarea_button",
+            label = "Copy and paste",
+            icon = icon("copy")
           )
         )
       ),
