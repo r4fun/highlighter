@@ -45,11 +45,6 @@ server <- function(input, output, session) {
     update_idx = 1L
   )
 
-  observe({
-    print(input$next_text)
-    print(input$previous_text)
-  })
-
   # ----------------------------------------------------------------------------
   #' Reactive data input, provided by user via file upload
   # ----------------------------------------------------------------------------
