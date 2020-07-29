@@ -9,7 +9,7 @@ ui <- fluidPage(
   titlePanel(div(class = "app-title", paste("Highlighter", ji("pencil")))),
   sidebarLayout(
     sidebarPanel = sidebarPanel(
-      "Upload a file or copy text from your clipboard!",
+      "Upload a file or paste text from your clipboard!",
       br(),
       br(),
       fluidRow(
