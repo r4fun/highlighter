@@ -42,7 +42,9 @@ server <- function(input, output, session) {
   rv <- reactiveValues(
     idx = 1L,
     max_idx = 1L,
-    update_idx = 1L
+    update_idx = 1L,
+    next_text = 1L,
+    previous_text = 1L
   )
 
   # ----------------------------------------------------------------------------
@@ -78,8 +80,16 @@ server <- function(input, output, session) {
   # ----------------------------------------------------------------------------
   #' Index based on next/previous clicks
   # ----------------------------------------------------------------------------
+  observeEvent(input$next_text, {
+    rv$next_text <- rv$next_text + 1L
+  })
+
+  observeEvent(input$previous_text, {
+    rv$previous_text <- rv$previous_text + 1L
+  })
+
   observe({
-    rv$idx <- as.numeric(1 + input$next_text - input$previous_text)
+    rv$idx <- as.numeric(1 + rv$next_text - rv$previous_text)
   })
 
   # ----------------------------------------------------------------------------
@@ -137,6 +147,8 @@ server <- function(input, output, session) {
 
     rv$update_idx <- rv$update_idx + 1
     rv$max_idx <- out$max_idx
+    rv$next_text <- 1L
+    rv$previous_text <- 1L
     output$text <- renderText(out$text)
   })
 
