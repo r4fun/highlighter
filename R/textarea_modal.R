@@ -1,7 +1,7 @@
 textarea_modal <- function() {
   showModal(
     modalDialog(
-      title = h3("Copy and paste", align = "center"),
+      title = h3("Paste some text", align = "center"),
       column(
         width = 12,
         align = "center",

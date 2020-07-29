@@ -20,3 +20,6 @@ invisible(lapply(list.files("R", full.names = TRUE), source))
 
 # app guide
 guide <- app_guide()
+
+# load demo data
+imdb <- read_rds("data/imdb.rds")

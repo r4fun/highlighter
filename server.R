@@ -49,26 +49,29 @@ server <- function(input, output, session) {
   #' Reactive data input, provided by user via file upload
   # ----------------------------------------------------------------------------
   data <- reactive({
-    req(input$file)
-    w$show()
-    removeModal()
+    if (is.null(input$file)) {
+      out <- imdb
+    } else {
+      req(input$file)
+      w$show()
+      removeModal()
 
-    ext <- file_ext(input$file$name)
-    out <- switch (ext,
-      csv = read_csv(input$file$datapath),
-      rds = read_rds(input$file$datapath),
-      xlsx = {
-        sheets <- excel_sheets(input$file$datapath)
-        out <- lapply(sheets, function(x) {
-          read_excel(input$file$datapath, sheet = x)
-        })
-        names(out) <- sheets
-        out
-      },
-      validate("Invalid file; Please upload a .csv, .xlsx, or .rds file")
-    )
-
-    w$hide()
+      ext <- file_ext(input$file$name)
+      out <- switch (ext,
+        csv = read_csv(input$file$datapath),
+        rds = read_rds(input$file$datapath),
+        xlsx = {
+          sheets <- excel_sheets(input$file$datapath)
+          out <- lapply(sheets, function(x) {
+            read_excel(input$file$datapath, sheet = x)
+          })
+          names(out) <- sheets
+          out
+        },
+        validate("Invalid file; Please upload a .csv, .xlsx, or .rds file")
+      )
+      w$hide()
+    }
     out
   })
 
@@ -87,7 +90,7 @@ server <- function(input, output, session) {
   observeEvent(data(), {
     if (inherits(data(), "list")) {
       show("hidden_tabname")
-      updateSelectizeInput(
+      updateSelectInput(
         session = session,
         inputId = "tabname",
         choices = names(data())
@@ -97,7 +100,7 @@ server <- function(input, output, session) {
     }
 
     if (inherits(data(), "data.frame")) {
-      updateSelectizeInput(
+      updateSelectInput(
         session = session,
         inputId = "colname",
         choices = names(data())
@@ -110,7 +113,7 @@ server <- function(input, output, session) {
   #' columns in that tab.
   # ----------------------------------------------------------------------------
   observeEvent(input$tabname, {
-    updateSelectizeInput(
+    updateSelectInput(
       session = session,
       inputId = "colname",
       choices = names(data()[[input$tabname]])
@@ -151,7 +154,7 @@ server <- function(input, output, session) {
     } else {
       enable("next_text")
     }
-  }, ignoreInit = TRUE)
+  })
 
   # ----------------------------------------------------------------------------
   #' Observe the idx reactive value:
@@ -188,17 +191,24 @@ server <- function(input, output, session) {
   #' Highlight text
   # ----------------------------------------------------------------------------
   marker <- marker$new("#text")
-
-  observeEvent(input$text1, {
-    marker$
-      unmark(className = "red")$
-      mark(input$text1, className = "red")
+  red_marker_listener <- reactive({
+    list(input$next_text, input$previous_text, input$text1)
   })
 
-  observeEvent(input$text2, {
+  blue_marker_listener <- reactive({
+    list(input$next_text, input$previous_text, input$text2)
+  })
+
+  observeEvent(red_marker_listener(), {
+    marker$
+      unmark(className = "red")$
+      mark(input$text1, className = "red", delay = 100)
+  })
+
+  observeEvent(blue_marker_listener(), {
     marker$
       unmark(className = "blue")$
-      mark(input$text2, className = "blue")
+      mark(input$text2, className = "blue", delay = 100)
   })
 
   # ----------------------------------------------------------------------------

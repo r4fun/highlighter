@@ -4,8 +4,14 @@ app_guide <- function() {
     step(
       el = "guide_file",
       title = "File Upload",
-      description = "First, you need to upload a file here. We currently accept a
-    .csv, .xlsx. and .rds file. Once a file has been uploaded, you're almost done!"
+      description = "Click this button to upload a file. Currently accepts a
+      .csv, .xlsx. and .rds file. If there's an excel file with multiple sheets,
+      a dropdown will pop up so you can switch between them."
+    )$
+    step(
+      el = "textarea_button",
+      title = "Paste button",
+      description = "If you just want to copy and paste some text, you can do that here."
     )$
     step(
       el = "guide_colname",

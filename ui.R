@@ -20,7 +20,7 @@ ui <- fluidPage(
             actionButton(
               width = "100%",
               inputId = "file_button",
-              label = "Upload file",
+              label = "Upload",
               icon = icon("upload")
             )
           )
@@ -30,7 +30,7 @@ ui <- fluidPage(
           actionButton(
             width = "100%",
             inputId = "textarea_button",
-            label = "Copy and paste",
+            label = "Paste",
             icon = icon("copy")
           )
         )
@@ -51,13 +51,11 @@ ui <- fluidPage(
         ),
         div(
           id = "guide_colname",
-          selectizeInput(
+          selectInput(
             inputId = "colname",
-            choices = NULL,
-            label = NULL,
-            options = list(
-              placeholder = "Select a column..."
-            )
+            choices = names(imdb),
+            selected = "Positive Reviews",
+            label = NULL
           )
         )
       ),
