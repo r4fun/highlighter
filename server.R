@@ -118,6 +118,11 @@ server <- function(input, output, session) {
     }
   })
 
+
+  output$table <- renderReactable({
+    reactable(data(), filterable = T)
+  })
+
   # ----------------------------------------------------------------------------
   #' If the tab name is populated, update the column name dropdown based on the
   #' columns in that tab.
@@ -129,6 +134,8 @@ server <- function(input, output, session) {
       choices = names(data()[[input$tabname]])
     )
   })
+
+
 
   # ----------------------------------------------------------------------------
   #' When the go button is hit, do the following:
@@ -202,7 +209,7 @@ server <- function(input, output, session) {
   # ----------------------------------------------------------------------------
   #' Highlight text
   # ----------------------------------------------------------------------------
-  marker <- marker$new("#text")
+  marker1 <- marker$new("#text")
   red_marker_listener <- reactive({
     list(input$next_text, input$previous_text, input$text1)
   })
@@ -212,16 +219,29 @@ server <- function(input, output, session) {
   })
 
   observeEvent(red_marker_listener(), {
-    marker$
+    marker1$
       unmark(className = "red")$
       mark(input$text1, className = "red", delay = 100)
   })
 
   observeEvent(blue_marker_listener(), {
-    marker$
+    marker1$
       unmark(className = "blue")$
       mark(input$text2, className = "blue", delay = 100)
   })
+
+  marker2 <- marker$new("#table")
+  observeEvent(input$txt1, {
+    marker2$
+      unmark(className = "red")$
+      mark(input$txt1, className = "red", delay = 100)
+  })
+  observeEvent(input$txt2, {
+    marker2$
+      unmark(className = "blue")$
+      mark(input$txt2, className = "blue", delay = 100)
+  })
+
 
   # ----------------------------------------------------------------------------
   #' App tour

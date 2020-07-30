@@ -5,6 +5,7 @@ ui <- fluidPage(
   use_waiter(),
   use_cicerone(),
   use_sever(),
+  includeScript("www/inputs.js"),
   includeCSS("www/custom.css"),
   titlePanel(div(class = "app-title", paste("Highlighter", ji("pencil")))),
   sidebarLayout(
@@ -70,28 +71,6 @@ ui <- fluidPage(
         )
       ),
       hr(
-        fluidRow(
-          column(
-            width = 6,
-            actionButton(
-              width = "100%",
-              inputId = "previous_text",
-              label = NULL,
-              icon = icon("arrow-left")
-            )
-          ),
-          column(
-            width = 6,
-            actionButton(
-              width = "100%",
-              inputId = "next_text",
-              label = NULL,
-              icon = icon("arrow-right")
-            )
-          )
-        )
-      ),
-      hr(
         actionButton(
           width = "100%",
           inputId = "help",
@@ -100,15 +79,43 @@ ui <- fluidPage(
       )
     ),
     mainPanel = mainPanel(
-      div(
-        id = "guide_text",
-        wellPanel(
-          div(
-            id = "text-to-mark",
-            textOutput("text")
-          )
-        )
+      tabsetPanel(
+        id = "tabs",
+        tabPanel(title = "As Panel",
+                 hr(
+                   fluidRow(
+                     column(
+                       width = 6,
+                       actionButton(
+                         width = "100%",
+                         inputId = "previous_text",
+                         label = NULL,
+                         icon = icon("arrow-left")
+                       )
+                     ),
+                     column(
+                       width = 6,
+                       actionButton(
+                         width = "100%",
+                         inputId = "next_text",
+                         label = NULL,
+                         icon = icon("arrow-right")
+                       )
+                     )
+                   )
+                 ),
+                 div(id = "guide_text",
+
+                     wellPanel(div(
+                       id = "text-to-mark",
+                       textOutput("text")
+                     )))),
+        tabPanel(title = "As Table",
+                 div(id = "guide_table",
+                     reactableOutput("table")))
+
       )
+
     )
   )
 )
