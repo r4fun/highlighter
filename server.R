@@ -120,7 +120,7 @@ server <- function(input, output, session) {
 
 
   output$table <- renderReactable({
-    reactable(data(), filterable = T)
+    reactable(data()[, input$colname], filterable = T)
   })
 
   # ----------------------------------------------------------------------------
@@ -231,15 +231,17 @@ server <- function(input, output, session) {
   })
 
   marker2 <- marker$new("#table")
-  observeEvent(input$txt1, {
+  observeEvent(input$txt0, {
+    print(input$txt0)
     marker2$
       unmark(className = "red")$
-      mark(input$txt1, className = "red", delay = 100)
+      mark(input$txt0, className = "red", delay = 100)
   })
-  observeEvent(input$txt2, {
+  observeEvent(input$txt1, {
+    print(input$txt1)
     marker2$
       unmark(className = "blue")$
-      mark(input$txt2, className = "blue", delay = 100)
+      mark(input$txt1, className = "blue", delay = 100)
   })
 
 
