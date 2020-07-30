@@ -115,13 +115,15 @@ server <- function(input, output, session) {
         inputId = "colname",
         choices = names(data())
       )
+      updateCheckboxGroupInput(
+        session = session,
+        inputId = "colnames",
+        choices = names(data()),
+        selected = names(data())[1]
+      )
     }
   })
 
-
-  output$table <- renderReactable({
-    reactable(data()[, input$colname], filterable = T)
-  })
 
   # ----------------------------------------------------------------------------
   #' If the tab name is populated, update the column name dropdown based on the
@@ -131,6 +133,11 @@ server <- function(input, output, session) {
     updateSelectInput(
       session = session,
       inputId = "colname",
+      choices = names(data()[[input$tabname]])
+    )
+    updateCheckboxGroupInput(
+      session = session,
+      inputId = "colnames",
       choices = names(data()[[input$tabname]])
     )
   })
@@ -230,20 +237,28 @@ server <- function(input, output, session) {
       mark(input$text2, className = "blue", delay = 100)
   })
 
-  marker2 <- marker$new("#table")
-  observeEvent(input$txt0, {
-    print(input$txt0)
-    marker2$
-      unmark(className = "red")$
-      mark(input$txt0, className = "red", delay = 100)
-  })
-  observeEvent(input$txt1, {
-    print(input$txt1)
-    marker2$
-      unmark(className = "blue")$
-      mark(input$txt1, className = "blue", delay = 100)
+  # ----------------------------------------------------------------------------
+  #' Table + Highlight text
+  # ----------------------------------------------------------------------------
+
+  observeEvent(c(input$colnames, input$search_type), {
+    req(length(input$colnames) > 0)
+    output$table <- renderReactable({
+      print(input$search_type)
+      reactable(data()[, input$colnames],
+                searchable = input$search_type %in% "whole",
+                filterable = input$search_type %in% "col")
+    })
   })
 
+  marker2 <- marker$new("#table")
+  observeEvent(input$filter_words, {
+    lapply(names(input$filter_words), function(word) {
+      marker2$
+        unmark(className = word)$
+        mark(input$filter_words[[word]], className = word, delay = 30)
+    })
+  })
 
   # ----------------------------------------------------------------------------
   #' App tour

@@ -60,3 +60,34 @@ body {
 .modal-footer {
   border-top: 0 none;
 }
+
+/* cover the background... */
+.tab-content {
+  background: white;
+}
+
+.nav-tabs>li>a {
+    background: lightgrey;
+    color: grey;
+}
+
+/* word colors */
+.txt0 {
+  background: #8CABD9
+}
+
+.txt1 {
+  background: #F6A7B8
+}
+
+.txt2 {
+  background: #F1EC7A
+}
+
+.txt3 {
+  background: #1D4D9F
+}
+
+.txt4 {
+  background: #F08838
+}

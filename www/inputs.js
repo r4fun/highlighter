@@ -4,14 +4,16 @@ $(document).on('shiny:sessioninitialized', function(event) {
 
     var txts = document.querySelectorAll('[aria-label*="Filter"]');
     var i;
+    var keywords = {};
     for (i = 0; i < txts.length; i++) {
 
       var txt = txts[i].value;
       var fld = 'txt' + i;
-      console.log(txt);
-      console.log(fld);
-      Shiny.onInputChange(fld, txt);
+      keywords[fld] = txt;
     }
+    console.log(keywords);
+
+    Shiny.setInputValue("filter_words", keywords);
 
   });
 
